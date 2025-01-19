@@ -15,6 +15,7 @@ namespace Application.Helpers
 
             CreateMap<Film, Film>();
             CreateMap<Film, FilmDto>();
+            CreateMap<FilmDto, Film>();
         }
     }
 }

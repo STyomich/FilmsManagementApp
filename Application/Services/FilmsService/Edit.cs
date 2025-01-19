@@ -1,5 +1,6 @@
 using AutoMapper;
 using Core.Domain.Entities;
+using Core.DTOs.Entities;
 using Infrastructure.DbContext;
 using MediatR;
 
@@ -9,7 +10,7 @@ namespace Application.Services.FilmsService
     {
         public class Command : IRequest<Result<Unit>>
         {
-            public Film? Film { get; set; }
+            public FilmDto? Film { get; set; }
         }
         public class Handler : IRequestHandler<Command, Result<Unit>>
         {

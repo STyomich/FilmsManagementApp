@@ -29,7 +29,7 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditFilm(Guid id, Film film)
+        public async Task<IActionResult> EditFilm(Guid id, FilmDto film)
         {
             film.Id = id;
             return HandleResult(await Mediator.Send(new Edit.Command { Film = film }));

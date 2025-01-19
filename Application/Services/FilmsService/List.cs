@@ -1,3 +1,4 @@
+using Application.Interfaces;
 using AutoMapper;
 using Core.DTOs.Entities;
 using Infrastructure.DbContext;
@@ -13,15 +14,17 @@ namespace Application.Services.FilmsService
         {
             private readonly DataContext _dataContext;
             private readonly IMapper _mapper;
-            public Handler(DataContext dataContext, IMapper mapper)
+            private readonly IUserAccessor _userAccessor;
+            public Handler(DataContext dataContext, IMapper mapper, IUserAccessor userAccessor)
             {
                 _dataContext = dataContext;
                 _mapper = mapper;
+                _userAccessor = userAccessor;
             }
             public async Task<List<FilmDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var films = await _dataContext.Films
-                    .ToListAsync();
+                var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.UserName == _userAccessor.GetUserName());
+                var films = await _dataContext.Films.Where(f => f.UserId == user.Id).ToListAsync();
                 return _mapper.Map<List<FilmDto>>(films);
             }
         }
