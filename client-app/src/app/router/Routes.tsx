@@ -1,3 +1,4 @@
+import CreateFilm from "../../features/films/CreateFilm";
 import FilmDetails from "../../features/films/FilmDetails";
 import FilmsList from "../../features/films/FilmsList";
 import LoginForm from "../identity/LoginForm";
@@ -14,6 +15,7 @@ export const routes: RouteObject[] = [
       { path: "/login", element: <LoginForm /> },
       { path: "/register", element: <RegisterForm /> },
       { path: "/details/:id", element: <FilmDetails /> },
+      { path: "/create", element: <CreateFilm /> },
     ],
   },
 ];

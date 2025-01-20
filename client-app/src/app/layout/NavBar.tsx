@@ -17,8 +17,8 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   const handleCreateClick = () => {
-    if (user) navigate("/create-short-url");
-    else toast.error("Not authorized");
+    if (user) navigate("/create");
+    else toast.error("Login into system to create film.");
   };
   return (
     <Box sx={{ marginBottom: "70px" }}>
@@ -27,6 +27,8 @@ export default function NavBar() {
         <Toolbar>
           <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
             <IconButton
+              component={NavLink}
+              to="/"
               size="large"
               edge="start"
               color="inherit"
