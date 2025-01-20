@@ -4,7 +4,7 @@ This repository contains a Film Management application with a C# backend and a R
 
 ## Prerequisites
 
-- [.NET SDK](https://dotnet.microsoft.com/download) (version 6.0 or later)
+- [.NET SDK](https://dotnet.microsoft.com/download) (version 8.0 or later)
 - [Node.js](https://nodejs.org/) (version 14.0 or later)
 - [npm](https://www.npmjs.com/get-npm) (usually comes with Node.js)
 
