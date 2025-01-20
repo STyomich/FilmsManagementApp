@@ -7,8 +7,17 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace API.Extensions
 {
+    /// <summary>
+    /// Custom static class for adding identity services to the IServiceCollection into Program.cs build process.
+    /// </summary>
     public static class IdentityServiceExtensions
     {
+        /// <summary>
+        /// Method for adding identity services to the IServiceCollection.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <returns>IServiceCollection services</returns>
          public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddIdentityCore<ApplicationUser>(opt =>

@@ -6,6 +6,9 @@ using MediatR;
 
 namespace Application.Services.FilmsService
 {
+    /// <summary>
+    /// Class for editing film entity via CQRS.
+    /// </summary>
     public class Edit
     {
         public class Command : IRequest<Result<Unit>>
@@ -26,7 +29,7 @@ namespace Application.Services.FilmsService
                 if (request.Film.Id == null) return Result<Unit>.Failure("Can`t identify film.");
                 if (request.Film.UserId == null) return Result<Unit>.Failure("Can`t identify user.");
                 if (request.Film.Rating < 1 || request.Film.Rating > 10) return Result<Unit>.Failure("Rating must be 1-10.");
-                if (request.Film.Title == null) return Result<Unit>.Failure("Failed to create a film.");
+                if (request.Film.Title == null) return Result<Unit>.Failure("Failed to edit a film, title can`t be blank.");
                 var film = await _dataContext.Films.FindAsync(request.Film.Id);
                 if (film == null) return null;
 

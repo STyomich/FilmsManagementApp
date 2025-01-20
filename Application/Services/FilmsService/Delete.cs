@@ -3,6 +3,9 @@ using MediatR;
 
 namespace Application.Services.FilmsService
 {
+    /// <summary>
+    /// Class for deleting film entity via CQRS.
+    /// </summary>
     public class Delete
     {
         public class Command : IRequest<Result<Unit>>

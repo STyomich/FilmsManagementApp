@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.FilmsService
 {
+    /// <summary>
+    /// Class for getting details of exact film via CQRS.
+    /// </summary>
     public class Details
     {
         public class Query : IRequest<Result<FilmDto>>

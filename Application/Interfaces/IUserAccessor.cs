@@ -7,6 +7,10 @@ namespace Application.Interfaces
         /// </summary>
         /// <returns>User name or null.</returns>
         string GetUserName();
-
+        /// <summary>
+        /// Function for return ID of user or null via claims.
+        /// </summary>
+        /// <returns>Guid or null.</returns>
+        string GetUserIdentifier();
     }
 }

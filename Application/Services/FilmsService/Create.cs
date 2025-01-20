@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.FilmsService
 {
+    /// <summary>
+    /// Class for creating film entity via CQRS.
+    /// </summary>
     public class Create
     {
         public class Command : IRequest<Result<Unit>>

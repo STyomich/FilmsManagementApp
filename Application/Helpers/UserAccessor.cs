@@ -17,6 +17,10 @@ namespace Application.Helpers
         {
             return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
         }
+        public string GetUserIdentifier()
+        {
+            return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
 
     }
 }

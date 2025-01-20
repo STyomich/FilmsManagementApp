@@ -28,7 +28,11 @@ namespace API.Controllers
             _mapper = mapper;
             _tokenService = tokenService;
         }
-
+        /// <summary>
+        /// Endpoint for login user via checking email and password.
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <returns>UserDto entity, or Unauthorized exception (401)</returns>
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
@@ -49,7 +53,11 @@ namespace API.Controllers
             }
             return Unauthorized();
         }
-
+        /// <summary>
+        /// Endpoint for register new user.
+        /// </summary>
+        /// <param name="registerDto"></param>
+        /// <returns>User entity, or BadRequest with errors.</returns>
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
@@ -84,7 +92,10 @@ namespace API.Controllers
 
             return BadRequest(result.Errors);
         }
-
+        /// <summary>
+        /// Endpoint for getting current user. Using in front-end integration for getting user data.
+        /// </summary>
+        /// <returns>UserDto entity.</returns>
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {

@@ -8,8 +8,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
 {
+    /// <summary>
+    /// Custom static class for adding application services to the IServiceCollection into Program.cs build process.
+    /// </summary>
     public static class ApplicationServiceExtensions
     {
+        /// <summary>
+        /// Method for adding application services to the IServiceCollection.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <returns>IServiceCollection services</returns>
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

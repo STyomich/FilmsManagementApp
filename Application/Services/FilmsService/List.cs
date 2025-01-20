@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.FilmsService
 {
+    /// <summary>
+    /// Class for getting list of films assigned to user via CQRS.
+    /// </summary>
     public class List
     {
         public class Query : IRequest<List<FilmDto>> { }
