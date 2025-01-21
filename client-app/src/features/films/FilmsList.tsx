@@ -16,17 +16,38 @@ import SearchPanel from "./SearchPanel";
 
 export default function FilmsList() {
   const dispatch = useDispatch();
-  const { list, status, error } = useSelector((state: unknown) => state.film);
-  const { user } = useSelector((state: unknown) => state.user);
+  const { list, status, error } = useSelector((state: any) => state.film); // Adjust typing as needed
+  const { user } = useSelector((state: any) => state.user);
   const [filteredList, setFilteredList] = useState<Film[]>([]);
+  const [sortOrder, setSortOrder] = useState<string>("");
 
-  useEffect(() => {
-    setFilteredList(list);
-  }, [list]);
+  const handleSort = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOrder = event.target.value;
+    setSortOrder(selectedOrder);
+    sortFilms(filteredList, selectedOrder);
+  };
+
+  const sortFilms = (films: Film[], order: string) => {
+    const sortedFilms = [...films].sort((a, b) =>
+      order === "asc" ? a.rating - b.rating : b.rating - a.rating
+    );
+    setFilteredList(sortedFilms);
+  };
+
+  const handleSearchByTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const filtered = list.filter((film: Film) =>
+      film.title.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    sortFilms(filtered, sortOrder);
+  };
 
   useEffect(() => {
     if (user) dispatch(fetchFilms());
   }, [dispatch, user]);
+
+  useEffect(() => {
+    setFilteredList(list);
+  }, [list]);
 
   if (status === "loading") {
     return <p>Loading films...</p>;
@@ -35,19 +56,14 @@ export default function FilmsList() {
   if (status === "failed") {
     return <p>Error: {error}</p>;
   }
+
   if (!user) {
     return <h1>Please, login to system</h1>;
   }
-  function handleSearchByTitle(event) {
-    const filtered = list.filter((film: Film) =>
-      film.title.includes(event.target.value)
-    );
-    setFilteredList(filtered);
-  }
+
   return (
-    <Box display="flex"
-    sx={{ margin: 2 }}>
-      <Box flex={3} sx={{ overflowX: 'auto' }}>
+    <Box display="flex" sx={{ margin: 2 }}>
+      <Box flex={3} sx={{ overflowX: "auto" }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -70,26 +86,14 @@ export default function FilmsList() {
                 <TableCell>{film.rating}</TableCell>
                 <TableCell>{film.description}</TableCell>
                 <TableCell>
-                  {user != null ? (
-                    <Button
-                      variant="contained"
-                      component={NavLink}
-                      sx={{ marginRight: "5px" }}
-                      to={`/details/${film.id}`}
-                    >
-                      Details
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="contained"
-                      disabled
-                      component={NavLink}
-                      sx={{ marginRight: "5px" }}
-                      to={`/details/${film.id}`}
-                    >
-                      Details
-                    </Button>
-                  )}
+                  <Button
+                    variant="contained"
+                    component={NavLink}
+                    sx={{ marginRight: "5px" }}
+                    to={`/details/${film.id}`}
+                  >
+                    Details
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -98,7 +102,13 @@ export default function FilmsList() {
       </Box>
       <Box>
         <h3>Search by Title</h3>
-        <input onChange={handleSearchByTitle}></input>
+        <input onChange={handleSearchByTitle} />
+        <h3>Sort by Rating</h3>
+        <select value={sortOrder} onChange={handleSort}>
+          <option value="">None</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
       </Box>
     </Box>
   );

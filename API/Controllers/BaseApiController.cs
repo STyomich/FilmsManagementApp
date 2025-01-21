@@ -1,5 +1,6 @@
 using Application.Services;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -8,6 +9,7 @@ namespace API.Controllers
     /// Custom base API controller with HandleResult method for handling returning state of the operation.
     /// </summary>
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class BaseApiController : ControllerBase
     {

@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Configure services to application:
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddSwagerServices(builder.Configuration);
 
 var app = builder.Build();
 
