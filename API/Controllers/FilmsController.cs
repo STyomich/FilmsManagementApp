@@ -14,7 +14,7 @@ namespace API.Controllers
             _mediator = mediator;
         }
         /// <summary>
-        /// Endpoint for returning all film which assigned to user by UserId. Searching films included claims.
+        /// Endpoint for returning all film which assigned to user by UserId. Searching films with Authorization header.
         /// </summary>
         /// <returns>List of FilmDto</returns>
         [HttpGet] //api/films
@@ -23,7 +23,7 @@ namespace API.Controllers
             return await _mediator.Send(new List.Query());
         }
         /// <summary>
-        /// Edpoint for creating new film. Creating film included claims for identify user.
+        /// Edpoint for creating new film. Creating film with Authorization header.
         /// </summary>
         /// <param name="film"></param>
         /// <returns>Ok(200) if operation done.</returns>
@@ -33,7 +33,7 @@ namespace API.Controllers
             return Ok(await Mediator.Send(new Create.Command { Film = film }));
         }
         /// <summary>
-        /// Endpoint for returning film details by Id. Searching film included claims.
+        /// Endpoint for returning film details by Id. Searching film with Authorization header.
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Film entity</returns>
@@ -43,7 +43,7 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
         }
         /// <summary>
-        /// Endpoint for editing film. Editing film included claims for identify user.
+        /// Endpoint for editing film. Editing film with Authorization header.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="film"></param>
@@ -55,7 +55,7 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Edit.Command { Film = film }));
         }
         /// <summary>
-        /// Endpoint for deleting film. Deleting film included claims for identify user.
+        /// Endpoint for deleting film. Deleting film with Authorization header.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

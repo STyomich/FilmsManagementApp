@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.OpenApi.Models;
 
 namespace API.Extensions
@@ -7,6 +8,9 @@ namespace API.Extensions
         public static IServiceCollection AddSwagerServices(this IServiceCollection services, IConfiguration config)
         {
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(options =>
                 {
@@ -16,6 +20,7 @@ namespace API.Extensions
                         Version = "v1",
                         Description = "API documentation for managing films.",
                     });
+                    options.IncludeXmlComments(xmlPath);
 
                     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                     {
